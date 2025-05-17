@@ -34,6 +34,7 @@ namespace CardGames.GameType.Scoundral
 				this.InitDungeon(DUNGEONSIZE - this._scoundralGameBoard.dungeon.Count);
 				this._scoundralGameBoard.DrawDungeon();
 				this._scoundralGameBoard.DrawPlayerInfo();
+				this._scoundralGameBoard.DrawGameBoardInfo();
 				this.GameBoard.Round++;
 			}
 			if(!this.GameBoard.Player.CanFlee.Value && (this.GameBoard.Round - this.GameBoard.Player.CanFlee.Key >= 2))
@@ -162,7 +163,7 @@ namespace CardGames.GameType.Scoundral
 				int dungeonCount = _scoundralGameBoard.dungeon.Count;
 				_scoundralGameBoard.WriteToGameBoard(_scoundralGameBoard.dctCoordinates[CoordniateType.gameMessages][0], [$" {actionType}! Enter the dungeon board position ({GetBoardPositions(suits)}) or Press 9 to cancel."]);
 
-				if (int.TryParse(Console.ReadLine(), out int position) && (dungeonCount >= position - 1 && position - 1 >= 0) && suits.Contains(_scoundralGameBoard.dungeon[position - 1].EnumSuit))
+				if (int.TryParse(Console.ReadLine(), out int position) && (dungeonCount >= position && position - 1 >= 0) && suits.Contains(_scoundralGameBoard.dungeon[position - 1].EnumSuit))
 				{
 					ICard selectedCard = _scoundralGameBoard.dungeon[position - 1];
 					callBack(selectedCard);
